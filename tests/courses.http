@@ -1,0 +1,86 @@
+### Recuperer tous les cours
+GET http://localhost:3000/api/courses
+
+### Créer un cours Intro C# (ID_ADA_LOVELACE)
+POST http://localhost:3000/api/courses
+Content-Type: application/json
+
+{
+  "title": "Introduction à C#",
+  "description": "Apprendre les bases du langage C# et de la programmation orientée objet.",
+  "instructorId": "ID_ADA_LOVELACE",
+  "duration": 40,
+  "maxStudents": 30,
+  "price": 299.99,
+  "level": "Beginner"
+}
+
+### Créer un cours ASP.NET Core (ID_ADA_LOVELACE)
+POST http://localhost:3000/api/courses
+Content-Type: application/json
+
+{
+  "title": "ASP.NET Core Avancé",
+  "description": "Maîtriser le développement d'API REST avec ASP.NET Core et Entity Framework.",
+  "instructorId": "a15d6cc2-e50d-4bc8-a2f3-fe90cccf3739",
+  "duration": 60,
+  "maxStudents": 25,
+  "price": 499.99,
+  "level": "Advanced"
+}
+
+### Créer un cours Physique Quantique (ID_MARIE_CURIE)
+POST http://localhost:3000/api/courses
+Content-Type: application/json
+
+{
+  "title": "Physique Quantique",
+  "description": "Comprendre les principes fondamentaux de la mécanique quantique.",
+  "instructorId": "ID_MARIE_CURIE",
+  "duration": 80,
+  "maxStudents": 20,
+  "price": 599.99,
+  "level": "Advanced"
+}
+
+### Créer un cours Maths Info (ID_ALBERT_EINSTEIN)
+POST http://localhost:3000/api/courses
+Content-Type: application/json
+
+{
+  "title": "Mathématiques pour l'Informatique",
+  "description": "Algèbre linéaire, calcul différentiel et probabilités appliquées.",
+  "instructorId": "ID_ALBERT_EINSTEIN",
+  "duration": 50,
+  "maxStudents": 35,
+  "price": 349.99,
+  "level": "Intermediate"
+}
+
+### Créer un cours Intro Prog (ID_ADA_LOVELACE)
+POST http://localhost:3000/api/courses
+Content-Type: application/json
+
+{
+  "title": "Introduction à la Programmation",
+  "description": "Premiers pas dans le monde de la programmation avec Python.",
+  "instructorId": "ID_ADA_LOVELACE",
+  "duration": 30,
+  "maxStudents": 50,
+  "price": 199.99,
+  "level": "Beginner"
+}
+
+### Ne devrait pas marcher (erreur validation Zod) (ID_ADA_LOVELACE)
+POST http://localhost:3000/api/courses
+Content-Type: application/json
+
+{
+  "title": "R",
+  "description": "Premiers pas dans le monde de la programmation avec Python.",
+  "instructorId": "a15d6cc2-e50d-4bc8-a2f3-fe90cccf3739",
+  "duration": 30,
+  "maxStudents": 50,
+  "price": 199.99,
+  "level": "Beginner"
+}

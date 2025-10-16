@@ -1,0 +1,38 @@
+### Recuperer tous les instructeurs
+GET http://localhost:3000/api/instructors
+
+### Créer Marie Curie
+POST http://localhost:3000/api/instructors
+Content-Type: application/json
+
+{
+  "firstName": "Marie",
+  "lastName": "Curie",
+  "specialty": "Physique et Chimie",
+  "email": "marie.curie@edutrack.com",
+  "hireDate": "2020-09-01"
+}
+
+### Créer Albert Einstein
+POST http://localhost:3000/api/instructors
+Content-Type: application/json
+
+{
+  "firstName": "Albert",
+  "lastName": "Einstein",
+  "specialty": "Mathématiques et Physique",
+  "email": "albert.einstein@edutrack.com",
+  "hireDate": "2021-01-15"
+}
+
+### Créer Ada Lovelace
+POST http://localhost:3000/api/instructors
+Content-Type: application/json
+
+{
+  "firstName": "Ada",
+  "lastName": "Lovelace",
+  "specialty": "Informatique et Programmation",
+  "email": "ada.lovelace@edutrack.com",
+  "hireDate": "2019-08-20"
+}
