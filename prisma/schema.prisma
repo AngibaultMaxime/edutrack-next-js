@@ -18,6 +18,7 @@ model User {
   role         String   @default("Student")
   isActive     Boolean  @default(true)
   createdAt    DateTime @default(now())
+  clerkId      String?  @unique
 
   @@index([createdAt])
   @@map("users")
