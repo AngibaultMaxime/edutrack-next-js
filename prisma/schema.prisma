@@ -12,13 +12,12 @@ model User {
   id           String   @id @default(uuid())
   username     String   @unique
   email        String   @unique
-  passwordHash String
-  firstName    String
-  lastName     String
+  firstName    String?
+  lastName     String?
   role         String   @default("Student")
   isActive     Boolean  @default(true)
   createdAt    DateTime @default(now())
-  clerkId      String?  @unique
+  clerkId      String   @unique
 
   @@index([createdAt])
   @@map("users")
