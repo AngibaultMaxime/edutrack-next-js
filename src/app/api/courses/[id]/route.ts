@@ -37,9 +37,12 @@ export async function PUT(
     return NextResponse.json(course); // status 200
   } catch (error) {
     if (error instanceof z.ZodError)
-      return NextResponse.json({
-        error: "Erreur de format. Impossible de mettre à jour le cours.",
-      });
+      return NextResponse.json(
+        {
+          error: "Erreur de format. Impossible de mettre à jour le cours.",
+        },
+        { status: 400 }
+      );
 
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       if (error.code === "P2002") {
