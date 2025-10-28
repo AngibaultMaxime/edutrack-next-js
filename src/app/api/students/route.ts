@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { createStudentSchema } from "@/lib/validation/student";
+import { Prisma } from "@prisma/client";
 import { NextResponse } from "next/server";
 import z from "zod";
 
@@ -42,6 +43,15 @@ export async function POST(req: Request) {
         { status: 400 }
       );
     }
+
+    if (
+      error instanceof Prisma.PrismaClientKnownRequestError &&
+      error.code === "P2002"
+    )
+      return NextResponse.json(
+        { error: "Un étudiant avec cet email existe déjà." },
+        { status: 409 }
+      );
 
     return NextResponse.json(
       { error: "Impossible de créer l'étudiant" },
