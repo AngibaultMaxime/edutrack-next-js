@@ -84,3 +84,17 @@ Content-Type: application/json
   "price": 199.99,
   "level": "Beginner"
 }
+
+### Ne devrait pas marcher (creer un cours avec un id d'instructeur qui n'existe pas --> erreur 400)
+POST http://localhost:3000/api/courses
+Content-Type: application/json
+
+{
+  "title": "Cours Test",
+  "description": "Premiers pas dans le monde de la programmation avec Python.",
+  "instructorId": "af8a5ace-1d36-4235-a096-c2aba7048f73",
+  "duration": 30,
+  "maxStudents": 50,
+  "price": 199.99,
+  "level": "Beginner"
+}
