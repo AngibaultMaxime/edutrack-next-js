@@ -1,0 +1,88 @@
+### Recuperer tous les étudiants
+GET http://localhost:3000/api/students
+
+### Créer Pierre Durand
+POST http://localhost:3000/api/students
+Content-Type: application/json
+
+{
+  "firstName": "Pierre",
+  "lastName": "Durand",
+  "email": "pierre.durand@student.com",
+  "registrationDate": "2025-01-10",
+  "level": "Beginner"
+}
+
+### Créer Sophie Bernard
+POST http://localhost:3000/api/students
+Content-Type: application/json
+
+{
+  "firstName": "Sophie",
+  "lastName": "Bernard",
+  "email": "sophie.bernard@student.com",
+  "registrationDate": "2025-02-15",
+  "level": "Intermediate"
+}
+
+### Créer Lucas Moreau
+POST http://localhost:3000/api/students
+Content-Type: application/json
+
+{
+  "firstName": "Lucas",
+  "lastName": "Moreau",
+  "email": "lucas.moreau@student.com",
+  "registrationDate": "2025-01-20",
+  "level": "Advanced"
+}
+
+### Créer Emma Leroy
+POST http://localhost:3000/api/students
+Content-Type: application/json
+
+{
+  "firstName": "Emma",
+  "lastName": "Leroy",
+  "email": "emma.leroy@student.com",
+  "registrationDate": "2025-03-01",
+  "level": "Beginner"
+}
+
+### Créer Thomas Petit
+POST http://localhost:3000/api/students
+Content-Type: application/json
+
+{
+  "firstName": "Thomas",
+  "lastName": "Petit",
+  "email": "thomas.petit@student.com",
+  "registrationDate": "2025-02-10",
+  "level": "Intermediate"
+}
+
+### Créer un étudiant MOCK
+POST http://localhost:3000/api/students
+Content-Type: application/json
+
+{
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "john.doe@student.com",
+  "registrationDate": "2025-02-10",
+  "level": "Intermediate"
+}
+
+### Modifier l'étudiant MOCK
+PUT http://localhost:3000/api/students/b69c803a-3b10-4ac3-9836-eff2c3e1f7db
+Content-Type: application/json
+
+{
+  "firstName": "Prénom modifié"
+}
+
+### Récuperer l'étudiant MOCK
+GET http://localhost:3000/api/students/b69c803a-3b10-4ac3-9836-eff2c3e1f7db
+
+### Suppression de l'étudiant MOCK
+DELETE http://localhost:3000/api/students/b69c803a-3b10-4ac3-9836-eff2c3e1f7db
