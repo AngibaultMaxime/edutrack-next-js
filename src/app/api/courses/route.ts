@@ -1,7 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { createCourseSchema } from "@/lib/validation/course";
 import { NextResponse } from "next/server";
-import { z } from "zod";
+import { success, z } from "zod";
 
 export async function GET() {
   try {
@@ -37,6 +37,46 @@ export async function POST(req: Request) {
       },
     });
     return NextResponse.json({ success: true, course }, { status: 201 });
+  } catch (error) {
+    if (error instanceof z.ZodError) {
+      return NextResponse.json(
+        { error: "Erreur de format. Impossible de créer le cours." },
+        { status: 400 }
+      );
+    }
+
+    return NextResponse.json(
+      { error: "Impossible de créer le cours" },
+      { status: 500 }
+    );
+  }
+}
+
+export async function PUT(req: Request) {
+  try {
+    const body = await req.json();
+
+    const courseData = createCourseSchema.parse(body);
+
+    const existing = prisma.course.findUnique({ where: { id: courseData.id } });
+
+    if (!existing)
+      return NextResponse.json({ error: "Cours non trouvé." }, { status: 404 });
+
+    const course = await prisma.course.update({
+      where: { id: courseData.id },
+      data: {
+        title: courseData.title,
+        description: courseData.description,
+        instructorId: courseData.instructorId,
+        duration: courseData.duration,
+        maxStudents: courseData.maxStudents,
+        price: courseData.price,
+        level: courseData.level,
+      },
+    });
+
+    return NextResponse.json({ success: true, course }, { status: 200 });
   } catch (error) {
     if (error instanceof z.ZodError) {
       return NextResponse.json(
