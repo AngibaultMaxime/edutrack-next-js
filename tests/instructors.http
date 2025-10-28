@@ -36,3 +36,29 @@ Content-Type: application/json
   "email": "ada.lovelace@edutrack.com",
   "hireDate": "2019-08-20"
 }
+
+### Créer un instructeur MOCK
+POST http://localhost:3000/api/instructors
+Content-Type: application/json
+
+{
+  "firstName": "John",
+  "lastName": "Doe",
+  "specialty": "Informatique et Programmation",
+  "email": "john.doe@edutrack.com",
+  "hireDate": "2019-08-28"
+}
+
+### Modifier le instructeur MOCK
+PUT http://localhost:3000/api/instructors/0f993529-0a25-4fc8-95e5-0870d597342b
+Content-Type: application/json
+
+{
+  "specialty": "Modification OK"
+}
+
+### Récuperer le instructeur MOCK
+GET http://localhost:3000/api/instructors/0f993529-0a25-4fc8-95e5-0870d597342b
+
+### Suppression du instructeur MOCK
+DELETE http://localhost:3000/api/instructors/0f993529-0a25-4fc8-95e5-0870d597342b
