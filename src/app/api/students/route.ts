@@ -1,0 +1,46 @@
+import { prisma } from "@/lib/prisma";
+import { createStudentSchema } from "@/lib/validation/student";
+import { NextResponse } from "next/server";
+import z from "zod";
+
+export async function GET() {
+  try {
+    const students = await prisma.student.findMany({
+      orderBy: { createdAt: "desc" },
+    });
+    return NextResponse.json(students);
+  } catch (error) {
+    return NextResponse.json(
+      { error: "Failed to fetch students" },
+      { status: 500 }
+    );
+  }
+}
+
+export async function POST(req: Request) {
+  try {
+    const body = await req.json();
+
+    // Validation Zod
+    const studentData = createStudentSchema.parse(body);
+
+    // Prisma create
+    const student = await prisma.student.create({
+      data: {
+        firstName: studentData.firstName,
+        lastName: studentData.lastName,
+        email: studentData.email,
+        registrationDate: studentData.registrationDate,
+        level: studentData.level
+      },
+    });
+    return NextResponse.json({ success: true, student }, { status: 201 });
+  } catch (error) {
+    if (error instanceof z.ZodError) {
+      return NextResponse.json(
+        { error: "Impossible de créer l'étudiant" },
+        { status: 500 }
+      );
+    }
+  }
+}
