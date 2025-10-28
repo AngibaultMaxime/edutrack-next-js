@@ -8,7 +8,7 @@ Content-Type: application/json
 {
   "title": "Introduction à C#",
   "description": "Apprendre les bases du langage C# et de la programmation orientée objet.",
-  "instructorId": "af0a5ace-1d36-4235-a096-c2aba7048f73",
+  "instructorId": "e040e24f-5c21-41ab-b44f-d0fbffdc8d1c",
   "duration": 40,
   "maxStudents": 30,
   "price": 299.99,
@@ -22,7 +22,7 @@ Content-Type: application/json
 {
   "title": "ASP.NET Core Avancé",
   "description": "Maîtriser le développement d'API REST avec ASP.NET Core et Entity Framework.",
-  "instructorId": "af0a5ace-1d36-4235-a096-c2aba7048f73",
+  "instructorId": "e040e24f-5c21-41ab-b44f-d0fbffdc8d1c",
   "duration": 60,
   "maxStudents": 25,
   "price": 499.99,
@@ -36,7 +36,7 @@ Content-Type: application/json
 {
   "title": "Physique Quantique",
   "description": "Comprendre les principes fondamentaux de la mécanique quantique.",
-  "instructorId": "ad6f9c1b-5a28-4f69-9bf9-86c723ff2b71",
+  "instructorId": "b6a4d4b3-5d74-4728-b22c-fbfc6930c1a5",
   "duration": 80,
   "maxStudents": 20,
   "price": 599.99,
@@ -50,7 +50,7 @@ Content-Type: application/json
 {
   "title": "Mathématiques pour l'Informatique",
   "description": "Algèbre linéaire, calcul différentiel et probabilités appliquées.",
-  "instructorId": "18efb46a-b10e-4578-b18f-f6c5bb6d02a0",
+  "instructorId": "d2136ea4-dda3-4851-9e60-95cd6c040029",
   "duration": 50,
   "maxStudents": 35,
   "price": 349.99,
@@ -64,7 +64,7 @@ Content-Type: application/json
 {
   "title": "Introduction à la Programmation",
   "description": "Premiers pas dans le monde de la programmation avec Python.",
-  "instructorId": "af0a5ace-1d36-4235-a096-c2aba7048f73",
+  "instructorId": "e040e24f-5c21-41ab-b44f-d0fbffdc8d1c",
   "duration": 30,
   "maxStudents": 50,
   "price": 199.99,
@@ -78,7 +78,7 @@ Content-Type: application/json
 {
   "title": "R",
   "description": "Premiers pas dans le monde de la programmation avec Python.",
-  "instructorId": "af0a5ace-1d36-4235-a096-c2aba7048f73",
+  "instructorId": "e040e24f-5c21-41ab-b44f-d0fbffdc8d1c",
   "duration": 30,
   "maxStudents": 50,
   "price": 199.99,
@@ -98,3 +98,31 @@ Content-Type: application/json
   "price": 199.99,
   "level": "Beginner"
 }
+
+### Créer un cours MOCK
+POST http://localhost:3000/api/courses
+Content-Type: application/json
+
+{
+  "title": "Cours a effacer",
+  "description": "C'est un test",
+  "instructorId": "e040e24f-5c21-41ab-b44f-d0fbffdc8d1c",
+  "duration": 30,
+  "maxStudents": 50,
+  "price": 199.99,
+  "level": "Beginner"
+}
+
+### Modifier le cours MOCK
+PUT http://localhost:3000/api/courses/9abb63a4-c2f7-4878-ac72-6d976fed1b79
+Content-Type: application/json
+
+{
+  "description": "J'ai reussi a modifier la description."
+}
+
+### Récuperer le cours MOCK
+GET http://localhost:3000/api/courses/9abb63a4-c2f7-4878-ac72-6d976fed1b79
+
+### Suppression du cours MOCK
+DELETE http://localhost:3000/api/courses/9abb63a4-c2f7-4878-ac72-6d976fed1b79
