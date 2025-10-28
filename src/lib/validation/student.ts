@@ -1,7 +1,6 @@
 import { z } from "zod";
 
 export const createStudentSchema = z.object({
-  id: z.uuid(),
   firstName: z
     .string()
     .min(2, "Le prénom doit contenir au moins 2 caractères.")
@@ -24,7 +23,9 @@ export const createStudentSchema = z.object({
     }),
 });
 
-export const updateStudentSchema = createStudentSchema.partial();
+export const updateStudentSchema = createStudentSchema
+  .partial()
+  .extend({ id: z.uuid() });
 
 export type CreateStudentInput = z.infer<typeof createStudentSchema>;
 export type UpdateStudentInput = z.infer<typeof updateStudentSchema>;
