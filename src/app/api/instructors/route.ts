@@ -11,7 +11,7 @@ export async function GET() {
     return NextResponse.json(instructors);
   } catch (error) {
     return NextResponse.json(
-      { error: "Failed to fetch instructors" },
+      { error: "Impossible de recuperer les instructeurs." },
       { status: 500 }
     );
   }
