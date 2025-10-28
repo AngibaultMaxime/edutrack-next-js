@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 export const createEnrollmentSchema = z.object({
+  id: z.uuid(),
   courseId: z.string().nonempty("L'identifiant du cours est obligatoire."),
   studentId: z.string().nonempty("L'identifiant de l'étudiant est obligatoire."),
   status: z.enum(["Active", "Completed", "Cancelled"]).optional(),

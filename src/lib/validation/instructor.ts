@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 export const createInstructorSchema = z.object({
+  id: z.uuid(),
   firstName: z.string()
     .min(2, "Le prénom doit contenir au moins 2 caractères.")
     .max(50, "Le prénom ne peut pas dépasser 50 caractères."),

@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 export const createCourseSchema = z.object({
+  id: z.uuid(),
   title: z.string().trim()
     .min(5, "Le titre doit contenir au moins 5 caractères.")
     .max(100, "Le titre ne peut pas dépasser 100 caractères."),
