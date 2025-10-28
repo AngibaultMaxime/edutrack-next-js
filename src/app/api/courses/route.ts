@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
-import { createCourseSchema } from "@/lib/validation/course";
+import { createCourseSchema, updateCourseSchema } from "@/lib/validation/course";
+import { Prisma } from "@prisma/client";
 import { NextResponse } from "next/server";
 import { success, z } from "zod";
 
@@ -45,6 +46,25 @@ export async function POST(req: Request) {
       );
     }
 
+    // ✅ Erreur Prisma connue
+    if (error instanceof Prisma.PrismaClientKnownRequestError) {
+      // Clé étrangère invalide (instructorId n’existe pas)
+      if (error.code === "P2003") {
+        return NextResponse.json(
+          { error: "L'instructeur spécifié n'existe pas." },
+          { status: 400 }
+        );
+      }
+
+      // Doublon unique, etc.
+      if (error.code === "P2002") {
+        return NextResponse.json(
+          { error: "Un cours avec ce titre existe déjà." },
+          { status: 409 }
+        );
+      }
+    }
+
     return NextResponse.json(
       { error: "Impossible de créer le cours" },
       { status: 500 }
@@ -56,7 +76,7 @@ export async function PUT(req: Request) {
   try {
     const body = await req.json();
 
-    const courseData = createCourseSchema.parse(body);
+    const courseData = updateCourseSchema.parse(body);
 
     const existing = prisma.course.findUnique({ where: { id: courseData.id } });
 
