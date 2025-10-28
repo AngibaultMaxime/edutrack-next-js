@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import { Prisma } from "@prisma/client";
 import { NextResponse } from "next/server";
 import { success } from "zod";
 
@@ -8,11 +9,20 @@ export async function GET(
 ) {
   const { id } = params;
 
-  const course = await prisma.course.findUnique({ where: { id } });
-  if (!course)
-    return NextResponse.json({ error: "Cours non trouvé" }, { status: 404 });
-
-  return NextResponse.json(course);
+  try {
+    const course = await prisma.course.findUnique({ where: { id } });
+    return NextResponse.json(course);
+  } catch (error) {
+    if (
+      error instanceof Prisma.PrismaClientKnownRequestError &&
+      error.code === "P2025"
+    )
+      return NextResponse.json({ error: "Cours non trouvé" }, { status: 404 });
+    return NextResponse.json(
+      { error: "Impossible de trouver le cours." },
+      { status: 500 }
+    );
+  }
 }
 
 export async function PUT(
@@ -20,12 +30,22 @@ export async function PUT(
   { params }: { params: { id: string } }
 ) {
   const { id } = params;
-
   const body = await req.json();
 
-  const course = await prisma.course.update({ where: { id }, data: body });
-
-  return NextResponse.json(course); // status 200
+  try {
+    const course = await prisma.course.update({ where: { id }, data: body });
+    return NextResponse.json(course); // status 200
+  } catch (error) {
+    if (
+      error instanceof Prisma.PrismaClientKnownRequestError &&
+      error.code === "P2025"
+    )
+      return NextResponse.json({ error: "Cours non trouvé" }, { status: 404 });
+    return NextResponse.json(
+      { error: "Impossible de mettre à jour le cours." },
+      { status: 500 }
+    );
+  }
 }
 
 export async function DELETE(
@@ -34,7 +54,18 @@ export async function DELETE(
 ) {
   const { id } = params;
 
-  await prisma.course.delete({ where: { id } });
-
-  return NextResponse.json({ success: true });
+  try {
+    await prisma.course.delete({ where: { id } });
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    if (
+      error instanceof Prisma.PrismaClientKnownRequestError &&
+      error.code === "P2025"
+    )
+      return NextResponse.json({ error: "Cours non trouvé" }, { status: 404 });
+    return NextResponse.json(
+      { error: "Impossible de supprimer le cours." },
+      { status: 500 }
+    );
+  }
 }
