@@ -38,9 +38,13 @@ export async function POST(req: Request) {
   } catch (error) {
     if (error instanceof z.ZodError) {
       return NextResponse.json(
-        { error: "Impossible de créer l'instructeur" },
-        { status: 500 }
+        { error: "Erreur de format. Impossible de créer l'instructeur." },
+        { status: 400 }
       );
     }
+    return NextResponse.json(
+      { error: "Impossible de créer l'instructeur" },
+      { status: 500 }
+    );
   }
 }

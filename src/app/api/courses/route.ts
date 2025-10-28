@@ -39,10 +39,11 @@ export async function POST(req: Request) {
     return NextResponse.json({ success: true, course }, { status: 201 });
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return NextResponse.json({ error: "Erreur de format. Impossible de créer le cours." }, { status: 400 });
+      return NextResponse.json(
+        { error: "Erreur de format. Impossible de créer le cours." },
+        { status: 400 }
+      );
     }
-
-    console.error(error);
 
     return NextResponse.json(
       { error: "Impossible de créer le cours" },
