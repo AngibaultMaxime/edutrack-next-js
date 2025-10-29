@@ -1,0 +1,28 @@
+# Variable pour stocker le token (a récuperer après le login)
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQyMjczYzVlLTQ5M2QtNDE3Mi1iMDA5LWNkNTAyYjU5MDI5ZSIsImVtYWlsIjoiYWxpY2VAZWR1dHJhY2suY29tIiwicm9sZSI6IlN0dWRlbnQiLCJpYXQiOjE3NjE3NTg1NjgsImV4cCI6MTc2MjM2MzM2OH0.OsSAimqxCzqo3xirOXLJORzD1Dd-RblvP2STnvW7kRU
+
+### Enregistrement d'utilisateur
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+  "username": "alice.student",
+  "email": "alice@edutrack.com",
+  "password": "Alice123!",
+  "firstName": "Alice",
+  "lastName": "Martin"
+}
+
+### Login de l'utilisateur crée
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+    "email": "alice@edutrack.com",
+    "password": "Alice123!"
+}
+
+### Verification reconnaissance utilisateur
+GET http://localhost:3000/api/auth/me
+Headers:
+Authorization: Bearer {{token}}

@@ -1,19 +1,35 @@
-import { currentUser } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
-import { email } from "zod";
+import { getUserFromRequest } from "@/lib/authHelpers";
+import { prisma } from "@/lib/prisma";
 
 export async function GET(req: Request) {
-  const user = await currentUser();
+  const { user, error } = await getUserFromRequest(req);
 
+  if (error) return error;
   if (!user) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    return NextResponse.json(
+      { error: "Utilisateur introuvable" },
+      { status: 401 }
+    );
   }
 
-  return NextResponse.json({
-    id: user.id,
-    email: user.emailAddresses[0].emailAddress,
-    firstName: user.firstName,
-    lastName: user.lastName,
-    role: user.publicMetadata.role || "student",
+  const dbUser = await prisma.user.findUnique({
+    where: { id: user.id },
+    select: {
+      id: true,
+      email: true,
+      role: true,
+      firstName: true,
+      lastName: true,
+      username: true,
+    },
   });
+
+  if (!dbUser)
+    return NextResponse.json(
+      { error: "Utilisateur introuvable dans la DB" },
+      { status: 404 }
+    );
+
+  return NextResponse.json(dbUser);
 }
