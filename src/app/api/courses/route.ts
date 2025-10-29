@@ -5,7 +5,12 @@ import { Prisma } from "@prisma/client";
 import { NextResponse } from "next/server";
 import z from "zod";
 
-export async function GET() {
+export async function GET(req: Request) {
+  // Vérifie le token et récupère l'utilisateur
+  const { error } = await getUserFromRequest(req);
+
+  if (error) return error; // 401 si pas de token, 403 si role interdit
+
   try {
     const courses = await prisma.course.findMany({
       orderBy: { createdAt: "desc" },
@@ -21,10 +26,7 @@ export async function GET() {
 
 export async function POST(req: Request) {
   // Vérifie le token et récupère l'utilisateur
-  const { user, error } = await getUserFromRequest(req, [
-    "Instructor",
-    "Admin",
-  ]);
+  const { error } = await getUserFromRequest(req, ["Instructor", "Admin"]);
 
   if (error) return error; // 401 si pas de token, 403 si role interdit
 
