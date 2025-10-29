@@ -17,7 +17,8 @@ export const createUserSchema = z.object({
     .enum(["Student", "Instructor", "Admin"])
     .refine((val) => ["Student", "Instructor", "Admin"].includes(val), {
       message: "Le role doit être 'Student', 'Instructor' ou 'Admin'.",
-    }),
+    })
+    .default("Student"),
 });
 
 export const updateUserSchema = createUserSchema
