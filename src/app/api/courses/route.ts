@@ -1,12 +1,9 @@
 import { getUserFromRequest } from "@/lib/authHelpers";
 import { prisma } from "@/lib/prisma";
-import {
-  createCourseSchema,
-  updateCourseSchema,
-} from "@/lib/validation/course";
+import { createCourseSchema } from "@/lib/validation/course";
 import { Prisma } from "@prisma/client";
 import { NextResponse } from "next/server";
-import { success, z } from "zod";
+import z from "zod";
 
 export async function GET() {
   try {
@@ -24,7 +21,10 @@ export async function GET() {
 
 export async function POST(req: Request) {
   // Vérifie le token et récupère l'utilisateur
-  const { user, error } = await getUserFromRequest(req, ["Instructor", "Admin"]);
+  const { user, error } = await getUserFromRequest(req, [
+    "Instructor",
+    "Admin",
+  ]);
 
   if (error) return error; // 401 si pas de token, 403 si role interdit
 
@@ -53,9 +53,12 @@ export async function POST(req: Request) {
         field: issue.path.join("."),
         message: issue.message,
       }));
-      
+
       return NextResponse.json(
-        { error: "Erreur de format. Impossible de créer le cours.", details: fieldErrors },
+        {
+          error: "Erreur de format. Impossible de créer le cours.",
+          details: fieldErrors,
+        },
         { status: 400 }
       );
     }
