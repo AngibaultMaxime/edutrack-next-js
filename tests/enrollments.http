@@ -1,9 +1,13 @@
+# Variable pour stocker le token (a récuperer après le login)
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQyMjczYzVlLTQ5M2QtNDE3Mi1iMDA5LWNkNTAyYjU5MDI5ZSIsImVtYWlsIjoiYWxpY2VAZWR1dHJhY2suY29tIiwicm9sZSI6IlN0dWRlbnQiLCJpYXQiOjE3NjE3NTg1NjgsImV4cCI6MTc2MjM2MzM2OH0.OsSAimqxCzqo3xirOXLJORzD1Dd-RblvP2STnvW7kRU
+
 ### Recuperer tous les enrollments
 GET http://localhost:3000/api/enrollments
 
 ### Créer enrollment 1 (INTRO C#, PIERRE)
 POST http://localhost:3000/api/enrollments
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "courseId": "ba10a3c2-de75-4eff-85e4-33e5ea826d98",
@@ -14,6 +18,7 @@ Content-Type: application/json
 ### Créer enrollment 2 (ASPNET, LUCAS)
 POST http://localhost:3000/api/enrollments
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "courseId": "242b9c3b-60d6-4d10-88bb-9ca807c5f20c",
@@ -24,6 +29,7 @@ Content-Type: application/json
 ### Créer enrollment 3 (PHYSIQUE, LUCAS)
 POST http://localhost:3000/api/enrollments
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "courseId": "c43cff37-9165-4e7b-a371-b5d22cd9032c",
@@ -35,6 +41,7 @@ Content-Type: application/json
 ### Créer enrollment 4 (MATHS, SOPHIE)
 POST http://localhost:3000/api/enrollments
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "courseId": "3988a378-5b7a-4dbc-8279-417ebe8d1d38",
@@ -45,6 +52,7 @@ Content-Type: application/json
 ### Créer enrollment 5 (INTRO PROG, PIERRE)
 POST http://localhost:3000/api/enrollments
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "courseId": "e2c5e660-2125-42d7-8c35-2e1448a32d99",
@@ -56,6 +64,7 @@ Content-Type: application/json
 ### Créer enrollment 6 (INTRO PROG, EMMA)
 POST http://localhost:3000/api/enrollments
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "courseId": "e2c5e660-2125-42d7-8c35-2e1448a32d99",
@@ -66,6 +75,7 @@ Content-Type: application/json
 ### Créer enrollment 7 (INTRO C#, THOMAS)
 POST http://localhost:3000/api/enrollments
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "courseId": "ba10a3c2-de75-4eff-85e4-33e5ea826d98",
@@ -76,6 +86,7 @@ Content-Type: application/json
 ### Créer enrollment 8 (MATHS, LUCAS)
 POST http://localhost:3000/api/enrollments
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "courseId": "3988a378-5b7a-4dbc-8279-417ebe8d1d38",
@@ -87,6 +98,7 @@ Content-Type: application/json
 ### Ne devrait pas marcher (creer un enrollment avec un id de cours qui n'existe pas --> erreur 400)
 POST http://localhost:3000/api/enrollments
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "courseId": "3988a378-5b7a-4dbc-8279-417ebe8d1d3c",
@@ -98,6 +110,7 @@ Content-Type: application/json
 ### Créer un enrollment MOCK
 POST http://localhost:3000/api/enrollments
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "courseId": "3988a378-5b7a-4dbc-8279-417ebe8d1d38",
@@ -109,6 +122,7 @@ Content-Type: application/json
 ### Modifier le enrollment MOCK
 PUT http://localhost:3000/api/enrollments/2338360a-bbd2-4923-a3b6-2077127edf14
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "status": "Active",
@@ -120,3 +134,4 @@ GET http://localhost:3000/api/enrollments/2338360a-bbd2-4923-a3b6-2077127edf14
 
 ### Suppression du enrollment MOCK
 DELETE http://localhost:3000/api/enrollments/2338360a-bbd2-4923-a3b6-2077127edf14
+Authorization: Bearer {{token}}

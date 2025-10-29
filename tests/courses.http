@@ -7,6 +7,7 @@ GET http://localhost:3000/api/courses
 ### Créer un cours Intro C# (ID_ADA_LOVELACE)
 POST http://localhost:3000/api/courses
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "title": "Introduction à C#",
@@ -36,6 +37,7 @@ Authorization: Bearer {{token}}
 ### Créer un cours Physique Quantique (ID_MARIE_CURIE)
 POST http://localhost:3000/api/courses
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "title": "Physique Quantique",
@@ -50,6 +52,7 @@ Content-Type: application/json
 ### Créer un cours Maths Info (ID_ALBERT_EINSTEIN)
 POST http://localhost:3000/api/courses
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "title": "Mathématiques pour l'Informatique",
@@ -64,6 +67,7 @@ Content-Type: application/json
 ### Créer un cours Intro Prog (ID_ADA_LOVELACE)
 POST http://localhost:3000/api/courses
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "title": "Introduction à la Programmation",
@@ -78,6 +82,7 @@ Content-Type: application/json
 ### Ne devrait pas marcher (erreur validation Zod, titre trop court) (ID_ADA_LOVELACE)
 POST http://localhost:3000/api/courses
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "title": "R",
@@ -92,6 +97,7 @@ Content-Type: application/json
 ### Ne devrait pas marcher (creer un cours avec un id d'instructeur qui n'existe pas --> erreur 400)
 POST http://localhost:3000/api/courses
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "title": "Cours Test",
@@ -106,6 +112,7 @@ Content-Type: application/json
 ### Créer un cours MOCK
 POST http://localhost:3000/api/courses
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "title": "Cours a effacer",
@@ -120,6 +127,7 @@ Content-Type: application/json
 ### Modifier le cours MOCK
 PUT http://localhost:3000/api/courses/9abb63a4-c2f7-4878-ac72-6d976fed1b79
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "description": "J'ai reussi a modifier la description."
@@ -130,3 +138,4 @@ GET http://localhost:3000/api/courses/9abb63a4-c2f7-4878-ac72-6d976fed1b79
 
 ### Suppression du cours MOCK
 DELETE http://localhost:3000/api/courses/9abb63a4-c2f7-4878-ac72-6d976fed1b79
+Authorization: Bearer {{token}}

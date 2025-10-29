@@ -1,9 +1,13 @@
+# Variable pour stocker le token (a récuperer après le login)
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQyMjczYzVlLTQ5M2QtNDE3Mi1iMDA5LWNkNTAyYjU5MDI5ZSIsImVtYWlsIjoiYWxpY2VAZWR1dHJhY2suY29tIiwicm9sZSI6IlN0dWRlbnQiLCJpYXQiOjE3NjE3NTg1NjgsImV4cCI6MTc2MjM2MzM2OH0.OsSAimqxCzqo3xirOXLJORzD1Dd-RblvP2STnvW7kRU
+
 ### Recuperer tous les étudiants
 GET http://localhost:3000/api/students
 
 ### Créer Pierre Durand
 POST http://localhost:3000/api/students
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "firstName": "Pierre",
@@ -16,6 +20,7 @@ Content-Type: application/json
 ### Créer Sophie Bernard
 POST http://localhost:3000/api/students
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "firstName": "Sophie",
@@ -28,6 +33,7 @@ Content-Type: application/json
 ### Créer Lucas Moreau
 POST http://localhost:3000/api/students
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "firstName": "Lucas",
@@ -40,6 +46,7 @@ Content-Type: application/json
 ### Créer Emma Leroy
 POST http://localhost:3000/api/students
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "firstName": "Emma",
@@ -52,6 +59,7 @@ Content-Type: application/json
 ### Créer Thomas Petit
 POST http://localhost:3000/api/students
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "firstName": "Thomas",
@@ -64,6 +72,7 @@ Content-Type: application/json
 ### Créer un étudiant MOCK
 POST http://localhost:3000/api/students
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "firstName": "John",
@@ -76,6 +85,7 @@ Content-Type: application/json
 ### Modifier l'étudiant MOCK
 PUT http://localhost:3000/api/students/b69c803a-3b10-4ac3-9836-eff2c3e1f7db
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "firstName": "Prénom modifié"
@@ -86,3 +96,4 @@ GET http://localhost:3000/api/students/b69c803a-3b10-4ac3-9836-eff2c3e1f7db
 
 ### Suppression de l'étudiant MOCK
 DELETE http://localhost:3000/api/students/b69c803a-3b10-4ac3-9836-eff2c3e1f7db
+Authorization: Bearer {{token}}

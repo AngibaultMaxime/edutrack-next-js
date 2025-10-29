@@ -1,9 +1,13 @@
+# Variable pour stocker le token (a récuperer après le login)
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQyMjczYzVlLTQ5M2QtNDE3Mi1iMDA5LWNkNTAyYjU5MDI5ZSIsImVtYWlsIjoiYWxpY2VAZWR1dHJhY2suY29tIiwicm9sZSI6IlN0dWRlbnQiLCJpYXQiOjE3NjE3NTg1NjgsImV4cCI6MTc2MjM2MzM2OH0.OsSAimqxCzqo3xirOXLJORzD1Dd-RblvP2STnvW7kRU
+
 ### Recuperer tous les instructeurs
 GET http://localhost:3000/api/instructors
 
 ### Créer Marie Curie
 POST http://localhost:3000/api/instructors
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "firstName": "Marie",
@@ -16,6 +20,7 @@ Content-Type: application/json
 ### Créer Albert Einstein
 POST http://localhost:3000/api/instructors
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "firstName": "Albert",
@@ -28,6 +33,7 @@ Content-Type: application/json
 ### Créer Ada Lovelace
 POST http://localhost:3000/api/instructors
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "firstName": "Ada",
@@ -40,6 +46,7 @@ Content-Type: application/json
 ### Créer un instructeur MOCK
 POST http://localhost:3000/api/instructors
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "firstName": "John",
@@ -52,6 +59,7 @@ Content-Type: application/json
 ### Modifier le instructeur MOCK
 PUT http://localhost:3000/api/instructors/0f993529-0a25-4fc8-95e5-0870d597342b
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "specialty": "Modification OK"
@@ -62,3 +70,4 @@ GET http://localhost:3000/api/instructors/0f993529-0a25-4fc8-95e5-0870d597342b
 
 ### Suppression du instructeur MOCK
 DELETE http://localhost:3000/api/instructors/0f993529-0a25-4fc8-95e5-0870d597342b
+Authorization: Bearer {{token}}
