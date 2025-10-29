@@ -1,3 +1,4 @@
+import { getUserFromRequest } from "@/lib/authHelpers";
 import { prisma } from "@/lib/prisma";
 import { createEnrollmentSchema } from "@/lib/validation/enrollment";
 import { Prisma } from "@prisma/client";
@@ -5,6 +6,11 @@ import { NextResponse } from "next/server";
 import z from "zod";
 
 export async function GET(req: Request) {
+  // Vérifie le token et récupère l'utilisateur
+  const { error } = await getUserFromRequest(req);
+
+  if (error) return error; // 401 si pas de token, 403 si role interdit
+
   try {
     const enrollments = await prisma.enrollment.findMany({
       orderBy: { createdAt: "desc" },
@@ -19,6 +25,11 @@ export async function GET(req: Request) {
 }
 
 export async function POST(req: Request) {
+  // Vérifie le token et récupère l'utilisateur
+  const { error } = await getUserFromRequest(req);
+
+  if (error) return error; // 401 si pas de token, 403 si role interdit
+
   try {
     const body = await req.json();
 
