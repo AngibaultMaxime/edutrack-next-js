@@ -1,0 +1,122 @@
+### Recuperer tous les enrollments
+GET http://localhost:3000/api/enrollments
+
+### Créer enrollment 1 (INTRO C#, PIERRE)
+POST http://localhost:3000/api/enrollments
+Content-Type: application/json
+
+{
+  "courseId": "ba10a3c2-de75-4eff-85e4-33e5ea826d98",
+  "studentId": "83abd9fa-d47c-4b9b-a078-365a05e62004",
+  "status": "Active"
+}
+
+### Créer enrollment 2 (ASPNET, LUCAS)
+POST http://localhost:3000/api/enrollments
+Content-Type: application/json
+
+{
+  "courseId": "242b9c3b-60d6-4d10-88bb-9ca807c5f20c",
+  "studentId": "091d69f9-67eb-4329-afe6-b0a31f89c3e3",
+  "status": "Active"
+}
+
+### Créer enrollment 3 (PHYSIQUE, LUCAS)
+POST http://localhost:3000/api/enrollments
+Content-Type: application/json
+
+{
+  "courseId": "c43cff37-9165-4e7b-a371-b5d22cd9032c",
+  "studentId": "091d69f9-67eb-4329-afe6-b0a31f89c3e3",
+  "status": "Completed",
+  "grade": 85.5
+}
+
+### Créer enrollment 4 (MATHS, SOPHIE)
+POST http://localhost:3000/api/enrollments
+Content-Type: application/json
+
+{
+  "courseId": "3988a378-5b7a-4dbc-8279-417ebe8d1d38",
+  "studentId": "5d58c687-53e2-4483-9034-f62f9fe2d500",
+  "status": "Active"
+}
+
+### Créer enrollment 5 (INTRO PROG, PIERRE)
+POST http://localhost:3000/api/enrollments
+Content-Type: application/json
+
+{
+  "courseId": "e2c5e660-2125-42d7-8c35-2e1448a32d99",
+  "studentId": "83abd9fa-d47c-4b9b-a078-365a05e62004",
+  "status": "Completed",
+  "grade": 92.0
+}
+
+### Créer enrollment 6 (INTRO PROG, EMMA)
+POST http://localhost:3000/api/enrollments
+Content-Type: application/json
+
+{
+  "courseId": "e2c5e660-2125-42d7-8c35-2e1448a32d99",
+  "studentId": "780545ee-b1fd-4f8a-8935-85888a356433",
+  "status": "Active"
+}
+
+### Créer enrollment 7 (INTRO C#, THOMAS)
+POST http://localhost:3000/api/enrollments
+Content-Type: application/json
+
+{
+  "courseId": "ba10a3c2-de75-4eff-85e4-33e5ea826d98",
+  "studentId": "323ce3b3-854f-4ca7-ab3b-5be2a759c119",
+  "status": "Cancelled"
+}
+
+### Créer enrollment 8 (MATHS, LUCAS)
+POST http://localhost:3000/api/enrollments
+Content-Type: application/json
+
+{
+  "courseId": "3988a378-5b7a-4dbc-8279-417ebe8d1d38",
+  "studentId": "091d69f9-67eb-4329-afe6-b0a31f89c3e3",
+  "status": "Completed",
+  "grade": 78.0
+}
+
+### Ne devrait pas marcher (creer un enrollment avec un id de cours qui n'existe pas --> erreur 400)
+POST http://localhost:3000/api/enrollments
+Content-Type: application/json
+
+{
+  "courseId": "3988a378-5b7a-4dbc-8279-417ebe8d1d3c",
+  "studentId": "091d69f9-67eb-4329-afe6-b0a31f89c3e3",
+  "status": "Completed",
+  "grade": 78.0
+}
+
+### Créer un enrollment MOCK
+POST http://localhost:3000/api/enrollments
+Content-Type: application/json
+
+{
+  "courseId": "3988a378-5b7a-4dbc-8279-417ebe8d1d38",
+  "studentId": "091d69f9-67eb-4329-afe6-b0a31f89c3e3",
+  "status": "Cancelled",
+  "grade": 0.0
+}
+
+### Modifier le enrollment MOCK
+PUT http://localhost:3000/api/enrollments/2338360a-bbd2-4923-a3b6-2077127edf14
+Content-Type: application/json
+
+{
+  "status": "Active",
+  "grade": 100.0
+}
+
+### Récuperer le enrollment MOCK
+GET http://localhost:3000/api/enrollments/2338360a-bbd2-4923-a3b6-2077127edf14
+
+### Suppression du enrollment MOCK
+DELETE http://localhost:3000/api/enrollments/2338360a-bbd2-4923-a3b6-2077127edf14
