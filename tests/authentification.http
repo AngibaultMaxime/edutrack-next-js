@@ -53,3 +53,15 @@ Content-Type: application/json
   "role": "Admin"
 }
 
+### Enregistrement de MOCK (ne devrait pas marché, role inconnu)
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+  "username": "erreur",
+  "email": "erreur@edutrack.com",
+  "password": "Admin123!",
+  "firstName": "Admin",
+  "lastName": "System",
+  "role": "ERREUR"
+}
