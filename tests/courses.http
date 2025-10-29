@@ -1,3 +1,6 @@
+# Variable pour stocker le token (a récuperer après le login)
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQyMjczYzVlLTQ5M2QtNDE3Mi1iMDA5LWNkNTAyYjU5MDI5ZSIsImVtYWlsIjoiYWxpY2VAZWR1dHJhY2suY29tIiwicm9sZSI6IlN0dWRlbnQiLCJpYXQiOjE3NjE3NTg1NjgsImV4cCI6MTc2MjM2MzM2OH0.OsSAimqxCzqo3xirOXLJORzD1Dd-RblvP2STnvW7kRU
+
 ### Recuperer tous les cours
 GET http://localhost:3000/api/courses
 
@@ -18,6 +21,7 @@ Content-Type: application/json
 ### Créer un cours ASP.NET Core (ID_ADA_LOVELACE)
 POST http://localhost:3000/api/courses
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "title": "ASP.NET Core Avancé",

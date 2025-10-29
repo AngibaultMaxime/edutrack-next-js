@@ -1,3 +1,4 @@
+import { getUserFromRequest } from "@/lib/authHelpers";
 import { prisma } from "@/lib/prisma";
 import {
   createCourseSchema,
@@ -22,6 +23,11 @@ export async function GET() {
 }
 
 export async function POST(req: Request) {
+  // Vérifie le token et récupère l'utilisateur
+  const { user, error } = await getUserFromRequest(req, ["Instructor", "Admin"]);
+
+  if (error) return error; // 401 si pas de token, 403 si role interdit
+
   try {
     const body = await req.json();
 
