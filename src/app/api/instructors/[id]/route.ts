@@ -11,16 +11,15 @@ export async function GET(
 
   try {
     const instructor = await prisma.instructor.findUnique({ where: { id } });
-    return NextResponse.json(instructor);
-  } catch (error) {
-    if (
-      error instanceof Prisma.PrismaClientKnownRequestError &&
-      error.code === "P2025"
-    )
+
+    if (!instructor)
       return NextResponse.json(
         { error: "Instructeur non trouvé" },
         { status: 404 }
       );
+
+    return NextResponse.json(instructor);
+  } catch (error) {
     return NextResponse.json(
       { error: "Impossible de trouver l'instructeur." },
       { status: 500 }

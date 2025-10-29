@@ -11,13 +11,12 @@ export async function GET(
 
   try {
     const course = await prisma.course.findUnique({ where: { id } });
+
+    if (!course)
+      return NextResponse.json({ error: "Cours non trouvé" }, { status: 404 });
+
     return NextResponse.json(course);
   } catch (error) {
-    if (
-      error instanceof Prisma.PrismaClientKnownRequestError &&
-      error.code === "P2025"
-    )
-      return NextResponse.json({ error: "Cours non trouvé" }, { status: 404 });
     return NextResponse.json(
       { error: "Impossible de trouver le cours." },
       { status: 500 }
