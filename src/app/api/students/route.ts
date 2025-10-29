@@ -38,8 +38,16 @@ export async function POST(req: Request) {
     return NextResponse.json({ success: true, student }, { status: 201 });
   } catch (error) {
     if (error instanceof z.ZodError) {
+      const fieldErrors = error.issues.map((issue) => ({
+        field: issue.path.join("."),
+        message: issue.message,
+      }));
+
       return NextResponse.json(
-        { error: "Erreur de format. Impossible de créer l'étudiant." },
+        {
+          error: "Erreur de format. Impossible de mettre à jour l'enrollment.",
+          details: fieldErrors,
+        },
         { status: 400 }
       );
     }

@@ -32,13 +32,22 @@ export async function POST(req: Request) {
         grade: enrollmentData.grade,
       },
     });
-    return NextResponse.json({ success: true, enrollment}, { status: 201 });
+    return NextResponse.json({ success: true, enrollment }, { status: 201 });
   } catch (error) {
-    if (error instanceof z.ZodError)
+    if (error instanceof z.ZodError) {
+      const fieldErrors = error.issues.map((issue) => ({
+        field: issue.path.join("."),
+        message: issue.message,
+      }));
+
       return NextResponse.json(
-        { error: "Erreur de format. Impossible de créer l'enrollment." },
+        {
+          error: "Erreur de format. Impossible de mettre à jour l'enrollment.",
+          details: fieldErrors,
+        },
         { status: 400 }
       );
+    }
 
     if (
       error instanceof Prisma.PrismaClientKnownRequestError &&

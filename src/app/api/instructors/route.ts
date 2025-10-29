@@ -37,11 +37,20 @@ export async function POST(req: Request) {
     return NextResponse.json({ success: true, instructor }, { status: 201 });
   } catch (error) {
     if (error instanceof z.ZodError) {
+      const fieldErrors = error.issues.map((issue) => ({
+        field: issue.path.join("."),
+        message: issue.message,
+      }));
+
       return NextResponse.json(
-        { error: "Erreur de format. Impossible de créer l'instructeur." },
+        {
+          error: "Erreur de format. Impossible de mettre à jour l'enrollment.",
+          details: fieldErrors,
+        },
         { status: 400 }
       );
     }
+    
     return NextResponse.json(
       { error: "Impossible de créer l'instructeur" },
       { status: 500 }

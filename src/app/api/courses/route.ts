@@ -1,5 +1,8 @@
 import { prisma } from "@/lib/prisma";
-import { createCourseSchema, updateCourseSchema } from "@/lib/validation/course";
+import {
+  createCourseSchema,
+  updateCourseSchema,
+} from "@/lib/validation/course";
 import { Prisma } from "@prisma/client";
 import { NextResponse } from "next/server";
 import { success, z } from "zod";
@@ -40,8 +43,13 @@ export async function POST(req: Request) {
     return NextResponse.json({ success: true, course }, { status: 201 });
   } catch (error) {
     if (error instanceof z.ZodError) {
+      const fieldErrors = error.issues.map((issue) => ({
+        field: issue.path.join("."),
+        message: issue.message,
+      }));
+      
       return NextResponse.json(
-        { error: "Erreur de format. Impossible de créer le cours." },
+        { error: "Erreur de format. Impossible de créer le cours.", details: fieldErrors },
         { status: 400 }
       );
     }

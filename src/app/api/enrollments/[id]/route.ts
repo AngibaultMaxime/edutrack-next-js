@@ -42,13 +42,20 @@ export async function PUT(
     });
     return NextResponse.json(enrollment);
   } catch (error) {
-    if (error instanceof z.ZodError)
+    if (error instanceof z.ZodError) {
+      const fieldErrors = error.issues.map((issue) => ({
+        field: issue.path.join("."),
+        message: issue.message,
+      }));
+
       return NextResponse.json(
         {
           error: "Erreur de format. Impossible de mettre à jour l'enrollment.",
+          details: fieldErrors,
         },
         { status: 400 }
       );
+    }
 
     if (
       error instanceof Prisma.PrismaClientKnownRequestError &&

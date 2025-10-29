@@ -35,13 +35,20 @@ export async function PUT(
     const course = await prisma.course.update({ where: { id }, data: body });
     return NextResponse.json(course); // status 200
   } catch (error) {
-    if (error instanceof z.ZodError)
+    if (error instanceof z.ZodError) {
+      const fieldErrors = error.issues.map((issue) => ({
+        field: issue.path.join("."),
+        message: issue.message,
+      }));
+
       return NextResponse.json(
         {
           error: "Erreur de format. Impossible de mettre à jour le cours.",
+          details: fieldErrors
         },
         { status: 400 }
       );
+    }
 
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       if (error.code === "P2002") {
