@@ -8,11 +8,6 @@ export async function GET(
   req: Request,
   { params }: { params: { id: string } }
 ) {
-  // Vérifie le token et récupère l'utilisateur
-  const { error } = await getUserFromRequest(req);
-
-  if (error) return error; // 401 si pas de token, 403 si role interdit
-
   const { id } = params;
 
   try {

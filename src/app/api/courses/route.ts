@@ -6,11 +6,6 @@ import { NextResponse } from "next/server";
 import z from "zod";
 
 export async function GET(req: Request) {
-  // Vérifie le token et récupère l'utilisateur
-  const { error } = await getUserFromRequest(req);
-
-  if (error) return error; // 401 si pas de token, 403 si role interdit
-
   try {
     const courses = await prisma.course.findMany({
       orderBy: { createdAt: "desc" },
