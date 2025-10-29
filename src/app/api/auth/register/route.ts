@@ -7,7 +7,7 @@ const JWT_SECRET = process.env.JWT_SECRET!;
 
 export async function POST(req: Request) {
   try {
-    const { username, email, password, firstName, lastName } = await req.json();
+    const { username, email, password, firstName, lastName, role } = await req.json();
 
     // Vérifie que l'utilisateur n'existe pas déjà
     const existingUser = await prisma.user.findFirst({
@@ -34,7 +34,7 @@ export async function POST(req: Request) {
         passwordHash,
         firstName,
         lastName,
-        role: "Student",
+        role,
         isActive: true,
       },
     });
