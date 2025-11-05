@@ -34,7 +34,6 @@ export const createCourseSchema = z.object({
 
 export const updateCourseSchema = createCourseSchema
   .partial()
-  .extend({ id: z.uuid() });
 
 export type CreateCourseInput = z.infer<typeof createCourseSchema>;
 export type UpdateCourseInput = z.infer<typeof updateCourseSchema>;

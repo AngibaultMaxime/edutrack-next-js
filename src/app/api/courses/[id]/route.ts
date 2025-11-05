@@ -1,5 +1,6 @@
 import { getUserFromRequest } from "@/lib/authHelpers";
 import { prisma } from "@/lib/prisma";
+import { updateCourseSchema } from "@/lib/validation/course";
 import { Prisma } from "@prisma/client";
 import { NextResponse } from "next/server";
 import z from "zod";
@@ -37,8 +38,10 @@ export async function PUT(
   const { id } = params;
   const body = await req.json();
 
+  const data = await updateCourseSchema.parse(body);
+
   try {
-    const course = await prisma.course.update({ where: { id }, data: body });
+    const course = await prisma.course.update({ where: { id }, data });
     return NextResponse.json(course); // status 200
   } catch (error) {
     if (error instanceof z.ZodError) {
