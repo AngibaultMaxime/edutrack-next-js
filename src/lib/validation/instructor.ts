@@ -22,9 +22,7 @@ export const createInstructorSchema = z.object({
   ),
 });
 
-export const updateInstructorSchema = createInstructorSchema
-  .partial()
-  .extend({ id: z.uuid() });
+export const updateInstructorSchema = createInstructorSchema.partial();
 
 export type CreateInstructorInput = z.infer<typeof createInstructorSchema>;
 export type UpdateInstructorInput = z.infer<typeof updateInstructorSchema>;

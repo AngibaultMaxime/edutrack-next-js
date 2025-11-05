@@ -1,5 +1,6 @@
 import { getUserFromRequest } from "@/lib/authHelpers";
 import { prisma } from "@/lib/prisma";
+import { updateInstructorSchema } from "@/lib/validation/instructor";
 import { Prisma } from "@prisma/client";
 import { NextResponse } from "next/server";
 import z from "zod";
@@ -38,12 +39,15 @@ export async function PUT(
   if (error) return error; // 401 si pas de token, 403 si role interdit
 
   const { id } = params;
-  const body = await req.json();
 
   try {
+    const body = await req.json();
+
+    const data = await updateInstructorSchema.parse(body);
+
     const instructor = await prisma.instructor.update({
       where: { id },
-      data: body,
+      data,
     });
     return NextResponse.json(instructor); // status 200
   } catch (error) {
