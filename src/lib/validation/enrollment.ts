@@ -13,9 +13,7 @@ export const createEnrollmentSchema = z.object({
     .optional(),
 });
 
-export const updateEnrollmentSchema = createEnrollmentSchema
-  .partial()
-  .extend({ id: z.uuid() });
+export const updateEnrollmentSchema = createEnrollmentSchema.partial();
 
 export type CreateEnrollmentInput = z.infer<typeof createEnrollmentSchema>;
 export type UpdateEnrollmentInput = z.infer<typeof updateEnrollmentSchema>;
