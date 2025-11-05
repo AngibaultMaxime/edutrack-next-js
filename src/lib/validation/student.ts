@@ -23,9 +23,7 @@ export const createStudentSchema = z.object({
     }),
 });
 
-export const updateStudentSchema = createStudentSchema
-  .partial()
-  .extend({ id: z.uuid() });
+export const updateStudentSchema = createStudentSchema.partial();
 
 export type CreateStudentInput = z.infer<typeof createStudentSchema>;
 export type UpdateStudentInput = z.infer<typeof updateStudentSchema>;
